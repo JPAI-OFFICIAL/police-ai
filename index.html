@@ -4,50 +4,707 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIP Cyber Guard & Risk Advisory</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #0f172a; color: #f8fafc; }
-        .gold-text { color: #d97706; }
-        .gold-border { border-color: #d97706; }
+        :root {
+            --bg-color: #030712;
+            --header-bg: #070d1d;
+            --text-color: #f3f4f6;
+            --accent-color: #1d4ed8;
+            --accent-hover: #2563eb;
+            --gold-color: #38bdf8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(11, 19, 38, 0.7);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Sarabun', sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Official Top Bar */
+        .official-top-bar {
+            background-color: #050b18;
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 24px;
+            font-size: 0.85rem;
+            color: #93c5fd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Main Header Structure */
+        header {
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-color), #0284c7);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.1rem;
+        }
+        .logo-text h2 {
+            font-size: 1.2rem;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .logo-text span {
+            font-size: 0.8rem;
+            color: var(--gold-color);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .header-nav {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+        .header-nav a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .header-nav a:hover {
+            color: #fff;
+        }
+        .header-action .btn-vip {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 22px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+        .header-action .btn-vip:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Tactical Banner Hero Section */
+        .tactical-hero {
+            position: relative;
+            width: 100%;
+            min-height: 450px;
+            background: linear-gradient(rgba(3, 7, 18, 0.75), rgba(3, 7, 18, 0.95)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+        .badge-official {
+            color: var(--gold-color);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        p.subtitle {
+            font-size: 1.1rem;
+            color: #9ca3af;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .btn-main {
+            background: linear-gradient(135deg, #1d4ed8, #0284c7);
+            color: white;
+            padding: 14px 36px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 20px rgba(29, 78, 216, 0.4);
+        }
+        .btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(29, 78, 216, 0.6);
+        }
+
+        /* Services Grid Bar */
+        .services-bar {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .service-card {
+            background: var(--card-bg);
+            padding: 24px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+        }
+        .service-card:hover {
+            background: rgba(29, 78, 216, 0.08);
+            border-bottom-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        .service-card h4 {
+            font-size: 1rem;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        .service-card span {
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        /* Blog & Success Stories Section */
+        .news-section {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .section-header h3 {
+            font-size: 1.5rem;
+            color: #fff;
+            font-weight: 700;
+        }
+        .section-header a {
+            color: var(--gold-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+        @media(max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .featured-news-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+        }
+        .featured-news-card:hover {
+            transform: translateY(-3px);
+        }
+        .news-img-placeholder {
+            width: 100%;
+            height: 240px;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #38bdf8;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .news-content {
+            padding: 25px;
+        }
+        .news-date {
+            font-size: 0.8rem;
+            color: var(--gold-color);
+            margin-bottom: 8px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .news-content h4 {
+            font-size: 1.25rem;
+            color: #fff;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .news-content p {
+            font-size: 0.95rem;
+            color: #9ca3af;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .read-more-btn {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .read-more-btn:hover {
+            text-decoration: underline;
+        }
+
+        .sub-news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-height: 520px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        .sub-news-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: block;
+        }
+        .sub-news-item:hover {
+            border-color: var(--gold-color);
+            background: rgba(56, 189, 248, 0.05);
+        }
+        .sub-news-date {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .sub-news-item h5 {
+            font-size: 0.95rem;
+            color: #fff;
+            line-height: 1.4;
+        }
+
+        /* Map & Location Section */
+        .map-section {
+            max-width: 1100px;
+            margin: 60px auto 30px auto;
+            padding: 0 20px;
+        }
+        .map-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        @media(max-width: 768px) {
+            .map-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        .map-info {
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .map-info h4 {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        .map-info p {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .map-frame-wrapper {
+            width: 100%;
+            height: 320px;
+        }
+        .map-frame-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: invert(90%) hue-rotate(180deg);
+        }
+
+        /* Social Media Section (เพิ่ม Facebook, X, Instagram, YouTube และ LINE OA ครบครัน) */
+        .social-footer-section {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .social-footer-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .social-footer-box h3 {
+            font-size: 1.25rem;
+            color: #fff;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .social-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--gold-color);
+            margin: 0 auto 15px auto;
+            border-radius: 2px;
+        }
+        .social-footer-box p {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+        .social-icons-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .social-icon-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .social-icon-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(56, 189, 248, 0.4);
+        }
+        /* สีประจำแต่ละแพลตฟอร์ม */
+        .icon-fb {
+            background-color: #1877f2; /* สีฟ้า Facebook */
+        }
+        .icon-x {
+            background-color: #000000;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .icon-ig {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #df3484 45%, #7624d9 90%);
+        }
+        .icon-yt {
+            background-color: #ff0000;
+        }
+        .icon-line {
+            background-color: #06c755; /* สีเขียวเอกลักษณ์ของ LINE */
+        }
+
+        /* Official Reference Footer */
+        .official-footer {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 30px 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .official-footer p {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Popup Announcement Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background: #0b132b;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+        }
+        .modal-content h3 {
+            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        .modal-content p {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        .modal-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .modal-btn:hover {
+            background-color: var(--accent-hover);
+        }
     </style>
 </head>
-<body class="font-sans antialiased">
-    <!-- Header / Navbar -->
-    <nav class="flex justify-between items-center px-8 py-6 border-b border-slate-800">
-        <div class="text-2xl font-bold tracking-widest gold-text">POLICE AI <span class="text-xs text-slate-400">VIP GUARD</span></div>
-        <div>
-            <button class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-semibold px-5 py-2 rounded-full transition">ปรึกษาเคส VIP</button>
+<body>
+
+    <!-- Popup ประกาศสำคัญ -->
+    <div id="announcementModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>US-THAI JOINT CYBER TASKFORCE</h3>
+            <p>ระบบปฏิบัติการข่าวกรองและคุ้มครองภัยไซเบอร์อัตโนมัติ พร้อมช่วยเหลือเหยื่อที่ถูกหลอกลวงสูญเสียทรัพย์สิน ติดตามกู้เงินคืน และประสานส่งเงินช่วยเหลือเยียวยาตลอด 24 ชั่วโมง</p>
+            <button class="modal-btn" onclick="closeModal()">ยืนยันเข้าสู่ระบบปลอดภัย</button>
         </div>
-    </nav>
+    </div>
+
+    <div class="official-top-bar">
+        <span>🌐 U.S.-Thailand Strategic Cyber Defense Advisory</span>
+        <span>Security Clearance: LEVEL-A VIP</span>
+    </div>
+
+    <!-- Header & Nav -->
+    <header>
+        <div class="logo-wrapper">
+            <div class="logo-icon">US</div>
+            <div class="logo-text">
+                <h2>CYBER TASKFORCE</h2>
+                <span>VIP RISK ADVISORY AI</span>
+            </div>
+        </div>
+        <nav class="header-nav">
+            <a href="#hero">หน้าหลัก</a>
+            <a href="#services">บริการของเรา</a>
+            <a href="#cases">ผลงานการช่วยเหลือ</a>
+            <a href="#location">ที่ตั้งหน่วยงาน</a>
+        </nav>
+        <div class="header-action">
+            <a href="https://lin.ee/your-line-oa-id" class="btn-vip" target="_blank">ปรึกษาเคสพิเศษ</a>
+        </div>
+    </header>
 
     <!-- Hero Section -->
-    <section class="max-w-4xl mx-auto text-center py-20 px-4">
-        <span class="text-xs tracking-widest uppercase bg-amber-950 text-amber-400 border border-amber-800 px-3 py-1 rounded-full">Exclusive Cyber Protection</span>
-        <h1 class="text-4xl md:text-6xl font-extrabold mt-6 leading-tight">
-            ศูนย์วิเคราะห์ความเสี่ยงและ <br><span class="gold-text">คุ้มครองภัยไซเบอร์ส่วนบุคคล VIP</span>
-        </h1>
-        <p class="text-slate-400 text-lg mt-6 max-w-2xl mx-auto">
-            บริการคัดกรองข้อมูลบุคคล สแกนการหลอกลวงระดับสูง (Romance Scam / Investment Fraud) พร้อมระบบจัดทำเอกสารสำนวนเสนอเจ้าหน้าที่ตำรวจและทนายความ
-        </p>
-        <div class="mt-10 flex justify-center gap-4">
-            <a href="#" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-8 py-3 rounded-lg shadow-lg">เริ่มต้นประเมินความเสี่ยง</a>
+    <section id="hero" class="tactical-hero">
+        <div class="hero-content">
+            <span class="badge-official">TACTICAL INTELLIGENCE & RECOVERY OPERATIONS</span>
+            <h1>ระบบวิเคราะห์ภัยคุกคามไซเบอร์ และปฏิบัติการกู้ทรัพย์สินคืนให้คนไทย</h1>
+            <p class="subtitle">บูรณาการเทคโนโลยี AI ร่วมกับหน่วยงานสากล สกัดกั้นขบวนการฉ้อโกงข้ามชาติ พร้อมติดตามเส้นทางการเงินและประสานส่งเงินช่วยเหลือให้แก่ผู้เสียหายอย่างเป็นรูปธรรม</p>
+            <a href="https://lin.ee/your-line-oa-id" class="btn-main" target="_blank">แจ้งเคสถูกหลอก / ประเมินความเสี่ยง</a>
         </div>
     </section>
 
-    <!-- Services Grid -->
-    <section class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl hover:border-amber-600/50 transition">
-            <h3 class="text-xl font-bold gold-text mb-2">Profile Risk Audit</h3>
-            <p class="text-slate-400 text-sm">ตรวจสอบความน่าเชื่อถือบุคคลและโปรไฟล์ดิจิทัล ป้องกันการหลอกลวงเชิงลึกก่อนโอนเงินหรือร่วมทุน</p>
+    <!-- Services Grid Bar -->
+    <div id="services" class="services-bar">
+        <a href="https://lin.ee/your-line-oa-id" class="service-card" target="_blank">
+            <h4>ตรวจสอบโปรไฟล์สแกมเมอร์</h4>
+            <span>Threat Intelligence Audit</span>
+        </a>
+        <a href="https://lin.ee/your-line-oa-id" class="service-card" target="_blank">
+            <h4>ติดตามและกู้คืนทรัพย์สิน</h4>
+            <span>Asset Recovery & Refund</span>
+        </a>
+        <a href="https://lin.ee/your-line-oa-id" class="service-card" target="_blank">
+            <h4>จัดทำสำนวนรายงานคดีสากล</h4>
+            <span>International Case Report</span>
+        </a>
+        <a href="https://lin.ee/your-line-oa-id" class="service-card" target="_blank">
+            <h4>ที่ปรึกษาความปลอดภัย</h4>
+            <span>Strategic Advisor</span>
+        </a>
+    </div>
+
+    <!-- Blog & Success Stories Section -->
+    <section id="cases" class="news-section">
+        <div class="section-header">
+            <h3>ผลงานปฏิบัติการและความสำเร็จในการช่วยเหลือ</h3>
+            <a href="https://lin.ee/your-line-oa-id" target="_blank">ดูทั้งหมด &rarr;</a>
         </div>
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl hover:border-amber-600/50 transition">
-            <h3 class="text-xl font-bold gold-text mb-2">Executive Legal Report</h3>
-            <p class="text-slate-400 text-sm">AI ช่วยสรุปไทม์ไลน์ รวบรวมหลักฐานแชทและสลิป แปลงเป็นเอกสารรายงานที่เป็นระบบพร้อมใช้งานทันที</p>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl hover:border-amber-600/50 transition">
-            <h3 class="text-xl font-bold gold-text mb-2">24/7 Private Advisory</h3>
-            <p class="text-slate-400 text-sm">ผู้ช่วย AI ให้คำปรึกษาและประสานงานรับมือเหตุภัยไซเบอร์ ตลอด 24 ชั่วโมงแบบเป็นลับที่สุด</p>
+
+        <div class="news-grid">
+            <div class="featured-news-card">
+                <div class="news-img-placeholder">
+                    <span>US-THAI CYBER RECOVERY OPERATION</span>
+                </div>
+                <div class="news-content">
+                    <span class="news-date">27 กันยายน 2569 | ปฏิบัติการพิเศษสากล</span>
+                    <h4>ปฏิบัติการร่วม US-Thai AI Taskforce ไล่ล่าเครือข่าย Romance Scam สำเร็จ! ส่งมอบเงินช่วยเหลือคืนผู้เสียหายชาวไทยกว่า 2.5 ล้านบาท</h4>
+                    <p>สืบเนื่องจากกรณีผู้เสียหายถูกขบวนการหลอกลงทุนข้ามชาติหลอกโอนเงินรวมกว่าหลายล้านบาท หน่วยปฏิบัติการร่วมได้ใช้ระบบ AI แกะรอยเส้นทางกระเป๋าเงินดิจิทัลและบัญชีม้าข้ามประเทศ จนสามารถอายัดและประสานส่งมอบเงินคืนแก่ผู้เสียหายได้สำเร็จครบถ้วนตามกระบวนการช่วยเหลือระดับสากล</p>
+                    <a href="https://lin.ee/your-line-oa-id" class="read-more-btn" target="_blank">อ่านรายละเอียดเคสนี้ &rarr;</a>
+                </div>
+            </div>
+
+            <div class="sub-news-list">
+                <a href="https://lin.ee/your-line-oa-id" class="sub-news-item" target="_blank">
+                    <span class="sub-news-date">25 กันยายน 2569</span>
+                    <h5>ช่วยเหลือเหยื่อแก๊งคอลเซ็นเตอร์อ้างเป็นหน่วยงานรัฐ สกัดเงินทันก่อนข้ามแดน</h5>
+                </a>
+                <a href="https://lin.ee/your-line-oa-id" class="sub-news-item" target="_blank">
+                    <span class="sub-news-date">22 กันยายน 2569</span>
+                    <h5>รายงานความร่วมมือด้านความมั่นคงไซเบอร์ระหว่างสหรัฐฯ และประเทศไทย ประจำไตรมาสที่ 3</h5>
+                </a>
+                <a href="https://lin.ee/your-line-oa-id" class="sub-news-item" target="_blank">
+                    <span class="sub-news-date">18 กันยายน 2569</span>
+                    <h5>เตือนภัยรูปแบบใหม่: AI Deepfake ปลอมเสียงผู้บริหารระดับสูงหลอกโอนเงิน</h5>
+                </a>
+                <a href="https://lin.ee/your-line-oa-id" class="sub-news-item" target="_blank">
+                    <span class="sub-news-date">15 กันยายน 2569</span>
+                    <h5>ปฏิบัติการกู้คืนสินทรัพย์ดิจิทัลและกระบวนการทางกฎหมายข้ามพรมแดน</h5>
+                </a>
+            </div>
         </div>
     </section>
+
+    <!-- Map & Location Section -->
+    <section id="location" class="map-section">
+        <div class="section-header">
+            <h3>ที่ตั้งศูนย์ปฏิบัติการและประสานงาน</h3>
+        </div>
+        <div class="map-container">
+            <div class="map-info">
+                <h4>ศูนย์ประสานงานภัยไซเบอร์ระหว่างประเทศ (US-Thai Cyber Taskforce)</h4>
+                <p><strong>ที่อยู่:</strong> เลขที่ 95 ถนนวิทยุ แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330 (พื้นที่ประสานงานร่วมยุทธศาสตร์สากล)</p>
+                <p>เปิดให้บริการประสานงานช่วยเหลือ ตรวจสอบเคสฉ้อโกง และกู้คืนทรัพย์สินออนไลน์ตลอด 24 ชั่วโมง</p>
+                <a href="https://lin.ee/your-line-oa-id" class="read-more-btn" target="_blank">ติดต่อเจ้าหน้าที่ประจำศูนย์ &rarr;</a>
+            </div>
+            <div class="map-frame-wrapper">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.556277689947!2d100.5451996!3d13.7387343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2ebf1110f038f%3A0x6b876fc15c44410a!2z4LmA4LiL4Lit4Lij4LmM4Lih4LiX4Liy4LiH4LiB4Lij4Li44LiH4Lia4Liy4LiHIOC4p-C4tOC4l-C4uOC4l-C4tOC4m-C4suC4h-C4reC4s-C4meC4tOC4pQ!5e0!3m2!1sth!2sth!4v1620000000000!5m2!1sth!2sth" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section (เพิ่ม Facebook, X, Instagram, YouTube และ LINE OA) -->
+    <section class="social-footer-section">
+        <div class="social-footer-box">
+            <h3>โซเชียลมีเดีย</h3>
+            <div class="social-divider"></div>
+            <p>ติดตามเราได้บนโซเชียลมีเดียต่อไปนี้</p>
+            <div class="social-icons-wrapper">
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/photo/?fbid=305557528276967&set=a.305557491610304" target="_blank" class="social-icon-btn icon-fb" title="Facebook">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <!-- X (Twitter) -->
+                <a href="https://x.com" target="_blank" class="social-icon-btn icon-x" title="X (Twitter)">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <!-- Instagram -->
+                <a href="https://instagram.com" target="_blank" class="social-icon-btn icon-ig" title="Instagram">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <!-- YouTube -->
+                <a href="https://youtube.com" target="_blank" class="social-icon-btn icon-yt" title="YouTube">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+                <!-- LINE Official Account -->
+                <a href="https://lin.ee/your-line-oa-id" target="_blank" class="social-icon-btn icon-line" title="LINE Official Account">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.413-.09-.547-.247l-2.335-2.748v2.368c0 .345-.283.629-.628.629-.345 0-.628-.284-.628-.629V8.108c0-.27.173-.51.43-.595.062-.022.133-.032.201-.032.211 0 .413.09.546.248l2.335 2.747V8.108c0-.345.282-.63.628-.63.345 0 .628.285.628.63v4.771zm-6.264-4.771c.345 0 .628.285.628.63v4.771c0 .345-.283.629-.628.629-.345 0-.628-.284-.628-.629V8.108c0-.345.283-.63.628-.63zm-3.525 0c.345 0 .628.285.628.63v3.743h1.365c.345 0 .628.284.628.629 0 .345-.283.63-.628.63H4.793c-.345 0-.628-.285-.628-.63V8.108c0-.345.283-.63.628-.63zm14.19-5.108C11.962 3 6 4.346 6 10.375c0 3.328 1.956 6.275 4.966 7.794-.194.733-.701 2.656-.804 3.064-.251 1.002.365.986.77.657.502-.406 4.792-3.155 5.578-3.693 2.502-.55 4.544-2.831 4.544-5.592 0-6.029-5.962-7.373-12.794-7.373z"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Official Reference Footer -->
+    <div class="official-footer">
+        <p>บูรณาการความร่วมมือด้านความมั่นคงและแนวทางปฏิบัติสอดคล้องกับหน่วยงานพันธมิตรระหว่างประเทศ</p>
+        <div class="footer-links">
+            <a href="https://th.usembassy.gov/" target="_blank">🔗 สถานเอกอัครราชทูตสหรัฐอเมริกาประจำประเทศไทย</a>
+            <a href="https://csd.cib.go.th/home" target="_blank">🔗 กองบังคับการปราบปราม (กองปราบ CIB)</a>
+        </div>
+    </div>
+
+    <script>
+        function closeModal() {
+            document.getElementById('announcementModal').style.display = 'none';
+        }
+    </script>
+
 </body>
 </html>
